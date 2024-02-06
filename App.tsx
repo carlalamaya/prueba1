@@ -1,18 +1,30 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, FlatList } from 'react-native';
+import DayListItem from './src/components/core/DayListItem';
 
-const days = [1,6,8];
+const days = [...Array(24)].map((val,index) => index+1 );
 
 export default function App() {
   return (
     <View style={styles.container}>
+      <FlatList
+        data={days}
+        contentContainerStyle={styles.content}
+        columnWrapperStyle={styles.column}
+        numColumns={2}
 
-      {days.map((days)=>(
-        <View style={styles.box}>
+
+        renderItem={({item}) => <DayListItem days={item}/>}
+        
+        
+      
+      />
+      {/* {days.map((days)=>(
+        <View style={styles.box} key={days}>
         <Text style={styles.text}>{days}</Text>
         </View>
       ))}
-      
+       */}
 
      
 
@@ -25,27 +37,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+   
 
     gap:10,
   },
+  content:{
+    gap:10,
+    padding:10,
 
-  box:{
-    backgroundColor:'#F9EDE3',
-    width:300,
-    height:300,
-
-    borderWidth:StyleSheet.hairlineWidth,
-    borderColor:'#9b4521',
-    borderRadius:20,
-
-    justifyContent:'center',
-    alignItems:'center',
-    
   },
-  text:{
-    color:'#9b4521',
-    fontSize:70,
+
+  column:{
+    gap:10,
   },
+  
 });
